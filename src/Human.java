@@ -9,7 +9,28 @@ public class Human {
     public Human father;
     public String[][] schedule;
 
-    public Human(String name, String surname, int yearOfBirth, int iq, Pet pet, Human mother, Human father, String[][] schedule) {
+    public Human(String name, String surname, int yearOfBirth) {
+        this.name = name;
+        this.surname = surname;
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    // Constructor to describe the name, surname, date of birth, father, and mother
+    public Human(String name, String surname, int yearOfBirth, Human father, Human mother) {
+        this.name = name;
+        this.surname = surname;
+        this.yearOfBirth = yearOfBirth;
+        this.father = father;
+        this.mother = mother;
+    }
+
+
+
+
+
+
+
+public Human(String name, String surname, int yearOfBirth, int iq, Pet pet, Human mother, Human father, String[][] schedule) {
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;
@@ -37,18 +58,9 @@ public class Human {
         }
         System.out.println(petDescription);
     }
+
+    public String toString(){
+        return "Human{name=' "+ name+", surname=' "+surname+"year="+yearOfBirth+",iq= "+ IQ+", mother="+mother +", father="+father+"pet="+pet+"{nickname='"+ pet.nickname+" ', age="+ pet.age+", trickLevel="+ pet.trickLevel+", habits="+ pet.habits+"}";
+    }
 }
 
-
-//    Describe Human with the following fields:
-//        (name)
-//        (surname)
-//        date of birth (year), number
-//        IQ level (iq) (a whole number from 1 to 100))
-//        (pet) (object type Pet)
-//        (mother) (object type Human)
-//        (father) (object type Human)
-//        Schedule of non-working activities (schedule) (2d array: [day of the week] x [type of the activity])
-//        Describe and implement the following methods for Human:
-//        (greetPet)("Hello, [the name of the pet]")
-//        (describePet): (display the information about your pet: "I have a [species], he is [age] years old, he is [very sly]>50/[almost not sly]<50".
