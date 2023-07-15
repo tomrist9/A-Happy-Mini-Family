@@ -7,7 +7,7 @@ public class Main {
 
         // Assigning father and mother to family1
 
-        Human family1 = new Human("Alex", "Doe", 1995, 112, pet1 , father1, mother1, new String[][]{new String[]{"eat; runs"}});
+        Human family1 = new Human("Alex", "Doe", 1995, 112, pet1, father1, mother1, new String[][]{new String[]{"eat; runs"}});
 
 
         System.out.println("Father:");
@@ -38,6 +38,15 @@ public class Main {
             child1.pet.response();
             child1.pet.foul();
 
+            child2.describePet();
+            if (child2.pet != null) {
+                child2.pet.eat();
+                child2.greetPet();
+                child2.pet.response();
+                child2.pet.foul();
+
+
+            }
         }
     }
 }
