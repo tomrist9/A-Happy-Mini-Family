@@ -1,23 +1,34 @@
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class Pet {
 
 
 
-
     public Species species;
     public String nickname;
-    public int age;
+    public static int age;
     protected int trickLevel;
-    protected String[] habits;
+    protected Set<String>habits = new HashSet<>();
+
 
     public Pet(Object o) {
+    }
+
+    public Pet(String nickname, int age, int trickLevel, Set<String> habits) {
     }
 
     public abstract void speak();
     public abstract void play();
     public abstract void respond();
+
+
+
+    public void setHabits(HashSet<String> habits) {
+      {
+            this.habits= Collections.singleton("woofs");
+        }
+
+    }
 
 
     public static class Fish extends Pet{
@@ -56,12 +67,12 @@ public void Pet(){
     }
 
     public static class DomesticCat extends Pet{
-        public DomesticCat(String nickname, int age, int trickLevel, String[] habits) {
+        public DomesticCat(String nickname, int age, int trickLevel, Set<String>habits) {
             super(nickname, age, trickLevel, habits);
         }
 
         public DomesticCat() {
-        super(Species.DomesticCat);
+        super(Species.DOMESTICCAT);
         }
 
         public DomesticCat(String whiskers) {
@@ -91,7 +102,7 @@ public void Pet(){
         }
     }
 public static class Dog extends Pet{
-    public Dog(String nickname, int age, int trickLevel, String[] habits) {
+    public Dog(String nickname, int age, int trickLevel, Set<String>habits) {
         super(nickname, age, trickLevel, habits);
     }
 
@@ -99,7 +110,8 @@ public static class Dog extends Pet{
     super(Species.DOG);
     }
 
-    public Dog(String buddy) {
+    public Dog(String nickname) {
+        this.nickname=nickname;
     }
 
 
@@ -123,8 +135,34 @@ public static class Dog extends Pet{
         System.out.println("The dog responds and makes a noise");
     }
 }
+
+public static class Cat extends Pet{
+        public Cat(String nickname, int age, int trickLevel, Set<String>habits) {
+            super(nickname, age, trickLevel, habits);
+        }
+
+    public Cat(String nickname) {
+            this.nickname=nickname;
+    }
+
+    @Override
+    public void speak() {
+        System.out.println("Cat is mewoing");
+    }
+
+    @Override
+    public void play() {
+        System.out.println("Can play with anybody");
+    }
+
+    @Override
+    public void respond() {
+        System.out.println("does not respond");
+    }
+
+}
   public static class RoboCat extends Pet{
-      public RoboCat(String nickname, int age, int trickLevel, String[] habits) {
+      public RoboCat(String nickname, int age, int trickLevel, Set<String>habits) {
           super(nickname, age, trickLevel, habits);
       }
 
@@ -161,7 +199,7 @@ public static class Dog extends Pet{
         MONKEY(2, false, true);
 
 
-        public static String DomesticCat;
+        public int trickLevel;
         private int numberOfLegs;
         private boolean canFly;
         private boolean hasFur;
@@ -194,11 +232,15 @@ public static class Dog extends Pet{
         this.nickname = nickname;
     }
 
-    public Pet(String nickname, int age, int trickLevel, String[] habits) {
+    public Pet(String nickname, int age, int trickLevel) {
 
         this.nickname = nickname;
         this.age = age;
         this.trickLevel = trickLevel;
+
+    }
+
+    public Pet(Set<String> habits) {
         this.habits = habits;
     }
 
@@ -225,11 +267,11 @@ public static class Dog extends Pet{
         return trickLevel;
     }
 
-    public String[] getHabits() {
+    public Set<String> getHabits() {
         return habits;
     }
 
-    public void setHabits(String[] habits) {
+    public void setHabits(Set<String> habits) {
         this.habits = habits;
     }
 
@@ -264,9 +306,11 @@ public static class Dog extends Pet{
                 ", nickname='" + nickname + '\'' +
                 ", age=" + age +
                 ", trickLevel=" + trickLevel +
-                ", habits=" + Arrays.toString(habits) + "numberOfLegs"+ getSpecies().getNumberOfLegs()+"canFly "+ getSpecies().canFly+"hasFur "+ getSpecies().hasFur+
+                ", habits=" + habits +
                 '}';
     }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -281,14 +325,14 @@ public static class Dog extends Pet{
               trickLevel==pet.trickLevel&&
               Objects.equals(nickname, pet.nickname)&&
               Objects.equals(species, pet.species)&&
-              Arrays.equals(habits, pet.habits);
+              Objects.equals(habits, pet.habits);
 
 
     }
+
+    @Override
     public int hashCode() {
-        int result = Objects.hash(species, nickname, age, trickLevel, getSpecies().numberOfLegs, getSpecies().canFly, getSpecies().hasFur);
-        result = 31 * result + Arrays.hashCode(habits);
-        return result;
+        return Objects.hash(species, nickname, age, trickLevel, habits);
     }
 
     protected void finalize() throws Throwable {

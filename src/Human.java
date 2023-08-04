@@ -1,70 +1,117 @@
-import java.util.Objects;
-import java.util.Random;
-import java.util.Arrays;
+import java.util.*;
 
 
 public class Human {
+    private String mother1;
+    private  String father1;
     private String name;
     private String surname;
     private int yearOfBirth;
     private int iq;
-    private Pet pet;
+
     private Family family;
+    private String mother;
+    private String father;
 
-    private String[][] activity;
+
+    private List<String> activity = new ArrayList<>();
     private Pet favoritePet;
-    private Main.DayOfWeek schedule;
+    private Map<String, String> schedule;
+ private Pet pet;
+
+    public Human(Pet pet) {
+        this.pet = pet;
+    }
+
+    public Human(String name, String surname, int i, int yearOfBirth, String mother1, String father1, Pet pet1) {
+        this.mother1 = String.valueOf(mother1);
+        this.name=name;
+        this.surname=surname;
+        this.iq=i;
+        this.yearOfBirth=yearOfBirth;
+        this.mother= String.valueOf(mother1);
+        this.father= String.valueOf(father1);
+        this.pet=pet1;
 
 
-    static final class Man extends Human{
-        public Man(String childName, double averageIQ) {
-        }
+    }
 
-        public void greetPet(){
-       System.out.println("Man: Hey Buddy, come here");
-   }
-   public void repairCar(){
-       System.out.println("Man: Let's go fix the car");
-   }
-    }
-    static final class Woman extends Human{
-        public Woman(String childName, double averageIQ) {
-        }
-
-        public void greetPet(){
-        System.out.println("Woman: Hey dear, come to mommy");
-    }
-    public void makeUp(){
-        System.out.println("Woman: It is time to make up");
-    }
-    }
-    public Human(String name, String surname, int yearOfBirth, Main.DayOfWeek schedule) {
-        this.name = name;
-        this.surname = surname;
-        this.yearOfBirth = yearOfBirth;
+    public Human(String name, String surname, int i, int i1, String mother2, String father2, Map<String, String> schedule2, Pet pet) {
+        this.name=name;
+        this.surname=surname;
+        this.iq=i1;
+        this.yearOfBirth=i;
+        this.mother=mother2;
+        this.father=father2;
+        this.pet=pet;
         this.schedule=schedule;
     }
 
 
 
-    public Human(String name, String surname, int yearOfBirth, int iq, Pet pet, Main.DayOfWeek schedule) {
+    @Override
+    public String toString() {
+        return "Human{" +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", yearOfBirth=" + yearOfBirth +
+                ", iq=" + iq +
+
+                ", family=" + family +
+                ", mother=" + mother +
+                ", father=" + father +
+                ", activity=" + activity +
+                ", favoritePet=" + favoritePet +
+                ", schedule=" + schedule +
+                '}';
+    }
+
+    static final class Man extends Human {
+        public Man(String childName, double averageIQ) {
+        }
+
+        public void greetPet() {
+            System.out.println("Man: Hey Buddy, come here");
+        }
+
+        public void repairCar() {
+            System.out.println("Man: Let's go fix the car");
+        }
+    }
+
+    static final class Woman extends Human {
+        public Woman(String childName, double averageIQ) {
+        }
+
+        public void greetPet() {
+            System.out.println("Woman: Hey dear, come to mommy");
+        }
+
+        public void makeUp() {
+            System.out.println("Woman: It is time to make up");
+        }
+    }
+
+
+
+
+
+
+
+    public Human (String name, String surname, int i, int i1, Pet pet1, Human mother1, Human father1, Map<String, String> schedule) {
         this.name = name;
         this.surname = surname;
-        this.yearOfBirth = yearOfBirth;
-        this.iq = iq;
-        this.pet = pet;
-
+        this.yearOfBirth = i;
+        this.iq = i1;
+        this.pet= pet1;
+        this.mother1 = String.valueOf(mother1);
+        this.father1 = String.valueOf(father1);
         this.schedule = schedule;
+
     }
 
-    public Human(Family family) {
-        this.family = family;
-    }
 
-    public Human(String michael, String karleone, int i, int i1, Pet pet1, Human mother1, Human father1, String[][] schedule1) {
-    }
-
-    public Human(String jane, String swimming, int i) {
+    public Human(String name, String surname, int i) {
     }
 
     public Family getFamily() {
@@ -86,33 +133,47 @@ public class Human {
     public Human() {
     }
 
-    public Main.DayOfWeek getSchedule() {
+    public Map<String, String> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Main.DayOfWeek schedule) {
+    public void setSchedule(Map<String, String> schedule) {
         this.schedule = schedule;
     }
 
     public void welcomePet() {
-        System.out.println("Hello, " + pet.getNickname());
-    }
 
+        if (pet!= null) {
+            System.out.println("Hello, " + pet.nickname);
+        } else {
+            System.out.println("No pet to welcome.");
+        }
+    }
     public void describePet() {
-        String trickLevelDescription = (pet.getTrickLevel() > 50) ? "very sly" : "almost not sly";
-        System.out.println("I have a " + pet.getSpecies() + ", he is " + pet.getAge() + " years old, he is " + trickLevelDescription + " (trick level: " + pet.getTrickLevel() + ")");
+        if (pet!= null) {
+
+            String trickLevelDescription = (pet.trickLevel > 50) ? "very sly" : "almost not sly";
+            System.out.println("I have a " + pet.nickname + ", he is " + Pet.age + " years old, he is " + trickLevelDescription + " (trick level: " + pet.getTrickLevel() + ")");
+        } else {
+            System.out.println("No pet to describe.");
+        }
     }
 
     public boolean feedPet(boolean isTimeForFeeding) {
-        int randomNum = new Random().nextInt(101);
-        if (isTimeForFeeding || pet.getTrickLevel() > randomNum) {
-            System.out.println("Hm... I will feed " + pet.getNickname());
-            return true;
-        } else {
-            System.out.println("I think " + pet.getNickname() + " is not hungry.");
-            return false;
+        if(pet!=null) {
+            int randomNum = new Random().nextInt(101);
+            if (isTimeForFeeding || pet.getTrickLevel() > randomNum) {
+                System.out.println("Hm... I will feed " + pet.getNickname());
+                return true;
+            } else {
+                System.out.println("I think " + pet.getNickname() + " is not hungry.");
+                return false;
+            }
         }
+                System.out.println("No pet to welcome.");
+        return isTimeForFeeding;
     }
+
    public void welcomefavouritePet(){
         if(favoritePet!=null){
             System.out.println("Welcome"+favoritePet.getNickname());
@@ -136,20 +197,8 @@ public class Human {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Human{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", yearOfBirth=" + yearOfBirth +
-                ", iq=" + iq +
-                ", pet=" + pet +
-                ", family=" + family +
-                ", activity=" + Arrays.toString(activity) +
-                ", favoritePet=" + favoritePet +
-                ", schedule=" + schedule +
-                '}';
-    }
+
+
 
 
 
@@ -160,6 +209,7 @@ public class Human {
     public String getSurname() {
         return surname;
     }
+
     public boolean equals(Object o) {
         if (this == o) {
             return true;

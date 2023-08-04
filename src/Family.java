@@ -1,20 +1,17 @@
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class Family implements Human.HumanCreator {
     private Human parent1;
     private Human mother;
     private Human father;
     private Human parent2;
-    private Human[] children;
-    private Pet pet;
+    private List<Human> children;
+    private Set<Pet> pet =new HashSet<>();
 
 
     private int childCount;
     private int maxChildren;
-    private Human[] familyMembers;
+    private List<Human> familyMembers;
     private int numberofMembers;
 
 
@@ -32,13 +29,126 @@ public class Family implements Human.HumanCreator {
     }
 
 
-
-
     public Family(Human parent1, Human parent2, int maxChildren) {
         this.parent1 = parent1;
         this.parent2 = parent2;
         this.maxChildren = maxChildren;
-        this.children = new Human[maxChildren];
+        this.children = new List<Human>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<Human> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Human human) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends Human> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int index, Collection<? extends Human> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public Human get(int index) {
+                return null;
+            }
+
+            @Override
+            public Human set(int index, Human element) {
+                return null;
+            }
+
+            @Override
+            public void add(int index, Human element) {
+
+            }
+
+            @Override
+            public Human remove(int index) {
+                return null;
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public ListIterator<Human> listIterator() {
+                return null;
+            }
+
+            @Override
+            public ListIterator<Human> listIterator(int index) {
+                return null;
+            }
+
+            @Override
+            public List<Human> subList(int fromIndex, int toIndex) {
+                return null;
+            }
+        };
         this.childCount = 0;
 
 
@@ -47,7 +157,122 @@ public class Family implements Human.HumanCreator {
     public Family(Human mother, Human father) {
         this.mother = mother;
         this.father = father;
-        this.children = new Human[0];
+        this.children = new List<Human>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<Human> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Human human) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends Human> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int index, Collection<? extends Human> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public Human get(int index) {
+                return null;
+            }
+
+            @Override
+            public Human set(int index, Human element) {
+                return null;
+            }
+
+            @Override
+            public void add(int index, Human element) {
+
+            }
+
+            @Override
+            public Human remove(int index) {
+                return null;
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public ListIterator<Human> listIterator() {
+                return null;
+            }
+
+            @Override
+            public ListIterator<Human> listIterator(int index) {
+                return null;
+            }
+
+            @Override
+            public List<Human> subList(int fromIndex, int toIndex) {
+                return null;
+            }
+        };
     }
 
     public Human getMother() {
@@ -66,11 +291,12 @@ public class Family implements Human.HumanCreator {
         this.father = father;
     }
 
-    public Pet getPet() {
+
+    public Set<Pet> getPet() {
         return pet;
     }
 
-    public void setPet(Pet pet) {
+    public void setPet(Set<Pet> pet) {
         this.pet = pet;
     }
 
@@ -90,15 +316,15 @@ public class Family implements Human.HumanCreator {
         this.parent2 = parent2;
     }
 
-    public Human[] getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
-    public void setChildren(Human[] children) {
+    public void setChildren(List<Human> children) {
         this.children = children;
     }
 
-    public int getChildCount() {
+    private int getChildCount() {
         return childCount;
     }
 
@@ -122,16 +348,23 @@ public class Family implements Human.HumanCreator {
                 ", mother=" + mother +
                 ", father=" + father +
                 ", parent2=" + parent2 +
-                ", children=" + Arrays.toString(children) +
+                ", children=" + children +
                 ", pet=" + pet +
                 ", childCount=" + childCount +
                 ", maxChildren=" + maxChildren +
+                ", familyMembers=" + familyMembers +
+                ", numberofMembers=" + numberofMembers +
+                ", motherName='" + motherName + '\'' +
+                ", fatherName='" + fatherName + '\'' +
+                ", childrenName=" + childrenName +
+                ", child=" + child +
                 '}';
     }
 
+
     public void addChildren(Human child) {
-        if (childCount < children.length) {
-            children[childCount] = this.child;
+        if (childCount < children.size()) {
+            children.set(childCount, this.child);
             childCount++;
         } else {
             System.out.println("No children added.");
@@ -140,14 +373,10 @@ public class Family implements Human.HumanCreator {
 
     public void removeChildren(Human child) {
         boolean removed = false;
-        for (int i = 0; i < childCount; i++) {
-            if (children[i].equals(child)) {
-                // Shift remaining children to fill the gap
-                for (int j = i; j < childCount - 1; j++) {
-                    children[j] = children[j + 1];
-                }
-                children[childCount - 1] = null;
-                childCount--;
+        for (int i = 0; i < children.size(); i++) {
+            if (children.get(i).equals(child)) {
+                // Remove the child from the list
+                children.remove(i);
                 return;
             }
         }
@@ -165,7 +394,7 @@ public class Family implements Human.HumanCreator {
     public int countFamily() {
         int count = 0;
         for (int i = 0; i < numberofMembers; i++) {
-            if (!familyMembers[i].equals(mother) && familyMembers[i].equals(father)) {
+            if (!familyMembers.get(i).equals(mother) && familyMembers.get(i).equals(father)) {
                 count++;
             }
         }
@@ -174,22 +403,21 @@ public class Family implements Human.HumanCreator {
 
 
     public boolean deleteChild(int index) {
-        if (index < 0 || index >= children.length) {
+        if (index < 0 || index >= children.size()) {
             return false;
         }
 
-        System.arraycopy(children, index + 1, children, index, children.length - index - 1);
-        children = Arrays.copyOf(children, children.length - 1);
+       children.remove(index);
 
         return true;
     }
 
 
-    public Human[] getFamilyMembers() {
+    public List<Human> getFamilyMembers() {
         return familyMembers;
     }
 
-    public void setFamilyMembers(Human[] familyMembers) {
+    public void setFamilyMembers(List<Human> familyMembers) {
         this.familyMembers = familyMembers;
     }
 
@@ -211,36 +439,21 @@ public class Family implements Human.HumanCreator {
     }
 
     private String getRandomName() {
-  
+
         String[] names = {"John", "Jane", "Michael", "Emily", "Robert", "Sophia"};
         Random random = new Random();
         return names[random.nextInt(names.length)];
     }
 
-static {
-            System.out.println("Family is being loaded");
-        }
+    static {
+        System.out.println("Family is being loaded");
+    }
 
     {
         System.out.println("A new family is created");
 
     }
-        public boolean equals(Object o){
-            if(this==o)
-                return true;
-            if(o==null||getClass()!=o.getClass())
-                return false;
-            Family family1= (Family) o;
-            return  Objects.equals(family1.father, father)&& Objects.equals(family1.mother, mother)&& Arrays.equals(family1.familyMembers, familyMembers);
 
-
-    }
-    public int hashCode(){
-     int result =Objects.hash(father, mother, pet);
-     result = 31*result +Arrays.hashCode(children);
-        result = 31*result +Arrays.hashCode(familyMembers);
-        return result;
-    }
 
     protected void finalize() throws Throwable {
         try {
@@ -248,6 +461,20 @@ static {
         } finally {
 
             super.finalize();
+
         }
+
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Family)) return false;
+        Family family = (Family) o;
+        return childCount == family.childCount && maxChildren == family.maxChildren && numberofMembers == family.numberofMembers && Objects.equals(parent1, family.parent1) && Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Objects.equals(parent2, family.parent2) && Objects.equals(children, family.children) && Objects.equals(pet, family.pet) && Objects.equals(familyMembers, family.familyMembers) && Objects.equals(motherName, family.motherName) && Objects.equals(fatherName, family.fatherName) && Objects.equals(childrenName, family.childrenName) && Objects.equals(child, family.child);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(parent1, mother, father, parent2, children, pet, childCount, maxChildren, familyMembers, numberofMembers, motherName, fatherName, childrenName, child);
+    }
+}

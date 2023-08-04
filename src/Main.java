@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Main {
 
     public enum DayOfWeek {
@@ -16,10 +18,12 @@ public class Main {
         Pet.DomesticCat cat = new Pet.DomesticCat("Whiskers");
         Pet.Dog dog = new Pet.Dog("Buddy");
         Pet.RoboCat roboCat = new Pet.RoboCat();
+        Pet.Cat cat1 =new Pet.Cat("Lucy");
 
 
 
-        Pet unknownPet = new Pet(null){
+
+        Pet unknownPet = new Pet((Set<String>) null){
             @Override
             public void speak() {
 
@@ -76,6 +80,13 @@ public class Main {
                 Human human = new Human();
             }
             Pet pet1 = new Pet(dog.nickname) {
+
+
+                @Override
+                public Species getSpecies() {
+                    return super.getSpecies();
+                }
+
                 @Override
                 public void speak() {
 
@@ -93,16 +104,21 @@ public class Main {
             };
             pet1.setAge(5);
             pet1.setTrickLevel(75);
-            pet1.setHabits(new String[]{"eat", "drink", "sleep"});
+            pet1.setHabits(new HashSet<>());
+            pet1.species= Pet.Species.DOG;
 
-            Human mother1 = new Human("Jane", "swimming", 1970);
+            Human mother1 = new Human("Jane", "Karleone", 1970);
             Human father1 = new Human("Vito", "Karleone", 1965);
 
 
-            String[][] schedule1 = {{"eat"}, {"run"}, {"sleep"}};
+        Map<String, String> schedule1= new HashMap<>();
+        schedule1.put("eat", "drink");
 
 
-            Human child1 = new Human("Michael", "Karleone", 1995, 90, pet1, mother1, father1, schedule1);
+
+
+            Human child1 = new Human("Michael", "Karleone", 1995, 90, "Jane", "Vito",
+                    dog);
             child1.welcomePet();
             child1.describePet();
             child1.feedPet(true);
@@ -112,7 +128,18 @@ public class Main {
             System.out.println(pet1.toString());
 
 
-            Pet pet2 = new Pet() {
+            Pet pet2 = new Pet(cat1.nickname) {
+
+
+
+                @Override
+                public Species getSpecies() {
+                    return super.getSpecies();
+                }
+
+
+
+
                 @Override
                 public void speak() {
 
@@ -130,17 +157,20 @@ public class Main {
             };
             pet2.setAge(7);
             pet2.setTrickLevel(70);
-            pet2.setHabits(new String[]{"eat", "mewoing", "sleep"});
+            pet2.setHabits(new HashSet<>());
 
             Human mother2 = new Human("Kate", "Smith", 1975);
             Human father2 = new Human("John", "Smith", 1977);
 
 
-            String[][] schedule2 = {{"eat"}, {"swimming"}, {"sleep"}};
+           Map<String , String > schedule2=new HashMap<>();
+       schedule2.put("eat", "swimming");
 
 
-            Human child2 = new Human("Karl", "Smith", 1997, 90, pet2, mother2, father2, schedule2);
-            child2.welcomefavouritePet();
+        Human child2 = new Human("Karl", "Smith", 1997, 90, "Nuna", "Lukas", schedule2, cat1);
+
+
+            child2.welcomePet();
             child2.describePet();
             child2.feedPet(true);
 
